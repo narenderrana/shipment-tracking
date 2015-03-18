@@ -31,10 +31,10 @@
     </head>
     <body>
         <div class="app">
-            <h1>PhoneGap</h1>
+            <h1>Shipment Tracking</h1>
             <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+                <p class="event received">Ready to start</p>
+                 <p class="event received" id="geoLocation" > </p>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -42,7 +42,7 @@
         <script type="text/javascript">
             app.initialize();
             var  onSucess =function(location) {
-                var R = 6371; // Radius of the earth in km
+                /*var R = 6371; // Radius of the earth in km
                 var dLat = (location.latitude-this.lastLatitude) * (Math.PI/180);  // deg2rad below
                 var dLon = (location.longitude-this.lastLongitude) * (Math.PI/180);
                 var a =
@@ -57,7 +57,11 @@
                 //Set timer HTML to total distance
                 var tracker = Ext.ComponentQuery.query("timer #gps")[0];
                 var value = Math.round(runtap.globals.totalDistance * 100) / 100;
-                tracker.setHtml(value + "<span style = 'font-size: 18px;'>km</span>");
+                tracker.setHtml(value + "<span style = 'font-size: 18px;'>km</span>");*/
+                if(window.document){
+                 window.document.getElementById("geoLocation").innerHTML="Cordinates are:("+location.latitude+","+location.longitude;
+                }
+
                 ajax("http://10.10.5.37:8080/shipment/track/add?"+"lat="+location.latitude+"&long="+location.longitude,function(response){
                    //response.currentTarget.responseText
                 });
