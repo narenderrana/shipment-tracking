@@ -16,6 +16,21 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ var ajax=function(url,callback){
+                
+                var  request;
+                if(window.XMLHttpRequest){
+                    request=new XMLHttpRequest;
+                }
+                else {
+                    request=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                
+               request.open('GET',url);
+               request.onload=callback;
+               request.send()
+            }
+
 var ENV = (function() {
     
     var localStorage = window.localStorage;
@@ -153,9 +168,12 @@ var app = {
             
             // Update our current-position marker.
             app.setCurrentLocation(location);
-
+            ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
+                   //response.currentTarget.responseText
+                   //http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude=56.5033630&longitude=-3.1276212
+                });
             // After you Ajax callback is complete, you MUST signal to the native code, which is running a background-thread, that you're done and it can gracefully kill that thread.
-            yourAjaxCallback.call(this);
+            //yourAjaxCallback.call(this);
         };
 
         var failureFn = function(error) {
@@ -361,7 +379,10 @@ var app = {
         app.location.setPosition(latlng);
         app.locationAccuracy.setCenter(latlng);
         app.locationAccuracy.setRadius(location.accuracy);
-
+        //ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
+                   //response.currentTarget.responseText
+                   //http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude=56.5033630&longitude=-3.1276212
+        // });
         // Add breadcrumb to current Polyline path.
         app.path.getPath().push(latlng);
         app.previousLocation = location;
