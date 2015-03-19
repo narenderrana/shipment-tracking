@@ -34,7 +34,8 @@
             <h1>Shipment Tracking</h1>
             <div id="deviceready" class="blink">
                 <p class="event received">Ready to start</p>
-                 <p class="event received" id="geoLocation" > </p>
+                 Sent to Server<p class="event received" id="geoLocationServer" > </p>
+                 <p class="event received" id="geolocation" > </p>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -59,14 +60,31 @@
                 var value = Math.round(runtap.globals.totalDistance * 100) / 100;
                 tracker.setHtml(value + "<span style = 'font-size: 18px;'>km</span>");*/
                 if(window.document){
-                 window.document.getElementById("geoLocation").innerHTML="Cordinates are:("+location.latitude+","+location.longitude;
+                 window.document.getElementById("geoLocationServer").innerHTML="Cordinates are:("+location.latitude+","+location.longitude;
                 }
 
-                ajax("http://10.10.5.37:8080/shipment/track/add?"+"lat="+location.latitude+"&long="+location.longitude,function(response){
+                ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
                    //response.currentTarget.responseText
+                   //http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude=56.5033630&longitude=-3.1276212
                 });
              
             }
+              document.addEventListener("deviceready", onDeviceReady, false);
+              function onDeviceReady() {
+                   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                }
+            function onSuccess(position) {
+                   var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: '           + position.coords.latitude      + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />' +
+                            'Altitude: '           + position.coords.altitude              + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                            'Heading: '            + position.coords.heading               + '<br />' +
+                            'Speed: '              + position.coords.speed                 + '<br />' +
+                            'Timestamp: '          + position.timestamp                    + '<br />';
+               }
+
 
               var ajax=function(url,callback){
                 
