@@ -29,7 +29,7 @@
                request.open('GET',url);
                request.onload=callback;
                request.send()
-            }
+  }
 
 var ENV = (function() {
     
@@ -199,7 +199,7 @@ var app = {
 
         // BackgroundGeoLocation is highly configurable.
         bgGeo.configure(callbackFn, failureFn, {
-            url: 'http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude='+app.locations[0].latitude+'&longitude='+app.locations[0].longitude, // <-- Android ONLY:  your server url to send locations to
+            url: 'http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321', // <-- Android ONLY:  your server url to send locations to
             params: {
                 auth_token: 'user_secret_auth_token',    //  <-- Android ONLY:  HTTP POST params sent to your server when persisting locations.
                 foo: 'bar'                              //  <-- Android ONLY:  HTTP POST params sent to your server when persisting locations.
@@ -379,10 +379,10 @@ var app = {
         app.location.setPosition(latlng);
         app.locationAccuracy.setCenter(latlng);
         app.locationAccuracy.setRadius(location.accuracy);
-        ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
+       // ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
                    //response.currentTarget.responseText
                    //http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude=56.5033630&longitude=-3.1276212
-        });
+       // });
         // Add breadcrumb to current Polyline path.
         app.path.getPath().push(latlng);
         app.previousLocation = location;
