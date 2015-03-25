@@ -196,7 +196,6 @@ var app = {
             app.stationaryRadius.setCenter(center);
 
         });
-
         // BackgroundGeoLocation is highly configurable.
         bgGeo.configure(callbackFn, failureFn, {
             url: 'http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321', // <-- Android ONLY:  your server url to send locations to
