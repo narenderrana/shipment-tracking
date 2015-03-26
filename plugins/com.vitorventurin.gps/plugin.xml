@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+		   id="com.vitorventurin.gps"
+	  version="0.1.1">
+	<name>GPS</name>
+	<description>Cordova GPS plugin - iOS CoreLocation LocationService / Android LocationService GPS</description>
+	<license>MIT</license>
+	<keywords>phonegap,GPS,corelocation,location,geolocation,locationservice,service</keywords>
+ 
+ 
+	<js-module src="www/gps.js" name="GPS">
+		<clobbers target="window.gps" />
+	</js-module>
+ 
+	<!-- android -->
+	<platform name="android">
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="17" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		</config-file>
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="GPS">
+				<param name="android-package" value="com.vitorventurin.gps.GPS"/>
+			</feature>
+		</config-file>
+ 
+		<source-file src="src/android/GPS.java" target-dir="src/com/vitorventurin/gps" />      
+	 </platform>     
+
+	<!-- ios -->
+	<platform name="ios">
+
+		<framework src="src/ios/Frameworks/CoreLocation.framework" custom="true" />
+		
+		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string></string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string></string>
+        </config-file>
+
+		<config-file target="config.xml" parent="/*">
+			<feature name="GPS">
+				<param name="ios-package" value="GPS" />
+			</feature>
+		</config-file>
+
+		<header-file src="src/ios/GPS.h" />
+		<source-file src="src/ios/GPS.m" />
+	</platform>
+</plugin>

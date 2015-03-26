@@ -1,0 +1,21 @@
+{
+    "version": "0.1.1",
+    "name": "com.vitorventurin.gps",
+    "cordova_name": "GPS",
+    "description": "Cordova GPS plugin - iOS CoreLocation LocationService / Android LocationService GPS",
+    "license": "MIT",
+    "keywords": [
+        "phonegap",
+        "GPS",
+        "corelocation",
+        "location",
+        "geolocation",
+        "locationservice",
+        "service"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": []
+}
