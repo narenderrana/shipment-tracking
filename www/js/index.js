@@ -171,9 +171,10 @@ var app = {
             ajax("http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&"+"latitude="+location.latitude+"&longitude="+location.longitude,function(response){
                    //response.currentTarget.responseText
                    //http://shipment-track.appspot.com/shipment/track/add?shipmentid=3132321&latitude=56.5033630&longitude=-3.1276212
+                yourAjaxCallback.call(this);
                 });
             // After you Ajax callback is complete, you MUST signal to the native code, which is running a background-thread, that you're done and it can gracefully kill that thread.
-            //yourAjaxCallback.call(this);
+            
         };
 
         var failureFn = function(error) {
